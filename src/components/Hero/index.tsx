@@ -1,33 +1,38 @@
-import Link from "next/link";
+import Image from "next/image";
 
 const Hero = () => {
   return (
-    <>
-      <section
-        id="hero"
-        className="relative z-10 overflow-hidden bg-white pb-16 pt-[120px] dark:bg-gray-dark md:pb-[120px] md:pt-[150px] xl:pb-[160px] xl:pt-[180px] 2xl:pb-[200px] 2xl:pt-[210px]"
-      >
-        <div className="container">
-          <div className="-mx-4 flex flex-wrap">
-            <div className="w-full px-4">
-              <div className="mx-auto max-w-[800px] text-center">
-                <h1 className="mb-5 text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight">
-                  OneTeam of Digital Retail and Green IT experts
-                </h1>
-                <p className="mb-12 text-base !leading-relaxed text-body-color dark:text-body-color-dark sm:text-lg md:text-xl">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. At
-                  voluptatem necessitatibus nihil rerum animi, pariatur,
-                  adipisci tenetur repellendus consequatur quam modi aut
-                  obcaecati fuga fugit ipsum aperiam suscipit? Numquam,
-                  adipisci!
-                </p>
-              </div>
-            </div>
+    <section id="home" className="h-screen overflow-hidden">
+      {/* Image de fond */}
+      <Image
+        src="/images/hero/hero.png"
+        alt="Dressing Room"
+        layout="fill"
+        objectFit="cover"
+        priority
+        className=""
+      />
+
+      <div className="absolute top-1/2 text-white leading-[5rem]">
+        <h1 className="text-[5rem] text-white"><span className="text-yellow md:before:text-[7rem]">O</span>neTeam</h1>
+        <div className="text-[3rem] flex space-x-2">
+          <div className="pl-7">
+            <span className="text-yellow">o</span>
+            <span>f</span>
           </div>
+          <h2 className="">Digital Retail Expertise</h2>
         </div>
-        {/* Import image of dressing */}
-      </section>
-    </>
+      </div>
+
+      <Image
+        src="/images/logo/Logo_orange.png"
+        alt="Hero Background"
+        priority
+        width={300}
+        height={300}
+        className="absolute max-sm:hidden -bottom-[7.5rem] right-10"
+      />
+    </section>
   );
 };
 
