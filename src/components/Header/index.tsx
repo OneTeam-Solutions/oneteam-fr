@@ -110,12 +110,12 @@ const Header = () => {
                         <a
                           href={menuItem.path}
                           onClick={(e) => {
-                            e.preventDefault(); // Prevent default anchor behavior
-                            handleScroll(menuItem.path); // Scroll to the section
+                            e.preventDefault();
+                            handleScroll(menuItem.path);
                           }}
                           className={`flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${usePathName === menuItem.path
-                            ? "text-primary dark:text-white"
-                            : "text-dark hover:text-[#F29D35] dark:text-white/70 dark:hover:text-[#F29D35]"
+                            ? "text-primary  dark:text-white"
+                            : "text-dark text-lg hover:text-[#F29D35] dark:text-white/70 dark:hover:text-[#F29D35]"
                             }`}
                         >
                           {menuItem.title}{" "}

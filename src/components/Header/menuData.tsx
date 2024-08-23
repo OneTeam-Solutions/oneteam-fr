@@ -7,16 +7,22 @@ const menuData: Menu[] = [
     path: "#about",
     newTab: false,
   },
+  // {
+  //   id: 2,
+  //   title: "Meet the Team",
+  //   path: "#meet-the-team",
+  //   newTab: false,
+  // },
   {
     id: 2,
-    title: "Meet the Team",
-    path: "#meet-the-team",
+    title: "Our Expertise",
+    path: "#expertise",
     newTab: false,
   },
   {
     id: 3,
-    title: "Our Commitments",
-    path: "/#",
+    title: "Project",
+    path: "#project",
     newTab: false,
   },
   {

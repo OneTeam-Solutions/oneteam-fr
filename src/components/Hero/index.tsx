@@ -13,7 +13,7 @@ const Hero = () => {
         className=""
       />
 
-      <div className="absolute top-1/2 text-white leading-[5rem]">
+      <div className="absolute top-1/2 ml-20 text-white leading-[5rem]">
         <h1 className="text-[5rem] text-white"><span className="text-yellow md:before:text-[7rem]">O</span>neTeam</h1>
         <div className="text-[3rem] flex space-x-2">
           <div className="pl-7">
