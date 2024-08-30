@@ -10,7 +10,7 @@ const Hero = () => {
         layout="fill"
         objectFit="cover"
         priority
-        className=""
+        className="bg-gray-600"
       />
 
       <div className="absolute top-1/2 ml-20 text-white leading-[5rem]">
