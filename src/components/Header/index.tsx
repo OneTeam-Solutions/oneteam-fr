@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
@@ -14,31 +13,40 @@ const Header = () => {
 
   // Sticky Navbar
   const [sticky, setSticky] = useState(false);
+  const [isOnHero, setIsOnHero] = useState(true);  // State to track if we're on the Hero section
+
   const handleStickyNavbar = () => {
+    const heroHeight = document.getElementById("home")?.offsetHeight || 0;
     if (window.scrollY >= 80) {
       setSticky(true);
     } else {
       setSticky(false);
     }
+    setIsOnHero(window.scrollY < heroHeight);  // Check if scroll is within the hero height
   };
   useEffect(() => {
     window.addEventListener("scroll", handleStickyNavbar);
+    return () => {
+      window.removeEventListener("scroll", handleStickyNavbar);
+    };
   });
 
-  const usePathName = usePathname();
-
-  // Function to handle smooth scrolling
   const handleScroll = (path: string) => {
     const targetId = path.replace("#", "");
     const targetElement = document.getElementById(targetId);
 
     if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: "smooth", // Smooth scrolling
-        block: "start",
+      const headerOffset = 70; // Hauteur approximative de la navbar, ajuste ce nombre en fonction de la hauteur réelle
+      const elementPosition = targetElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
       });
     }
   };
+
 
   return (
     <>
@@ -53,8 +61,8 @@ const Header = () => {
             <div className="w-60 max-w-full px-4 xl:mr-12">
               <a
                 onClick={(e) => {
-                  e.preventDefault(); // Prevent default anchor behavior
-                  handleScroll("#hero"); // Scroll to the hero section
+                  e.preventDefault();
+                  handleScroll("#hero");
                 }}
                 href="#hero"
                 className={`header-logo block w-full ${sticky ? "py-5 lg:py-2" : "py-8"
@@ -84,18 +92,7 @@ const Header = () => {
                   aria-label="Mobile Menu"
                   className="absolute right-4 top-1/2 block translate-y-[-50%] rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
                 >
-                  <span
-                    className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${navbarOpen ? " top-[7px] rotate-45" : " "
-                      }`}
-                  />
-                  <span
-                    className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${navbarOpen ? "opacity-0 " : " "
-                      }`}
-                  />
-                  <span
-                    className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${navbarOpen ? " top-[-8px] -rotate-45" : " "
-                      }`}
-                  />
+                  {/* Toggler icon visibility and styles */}
                 </button>
                 <nav
                   id="navbarCollapse"
@@ -113,9 +110,7 @@ const Header = () => {
                             e.preventDefault();
                             handleScroll(menuItem.path);
                           }}
-                          className={`flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${usePathName === menuItem.path
-                            ? "text-primary  dark:text-white"
-                            : "text-dark text-lg hover:text-[#F29D35] dark:text-white/70 dark:hover:text-[#F29D35]"
+                          className={`flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${isOnHero ? "text-white" : "text-dark hover:text-[#F29D35] dark:text-white/70 dark:hover:text-[#F29D35]"
                             }`}
                         >
                           {menuItem.title}{" "}
@@ -131,9 +126,7 @@ const Header = () => {
                 </nav>
               </div>
               <div className="flex items-center justify-end pr-16 lg:pr-0">
-                <div>
-                  <ThemeToggler />
-                </div>
+                {/* Optional right elements */}
               </div>
             </div>
           </div>
